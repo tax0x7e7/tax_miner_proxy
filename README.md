@@ -46,25 +46,25 @@
 
 同时我们支持**高级配置模式**，在该模式下，有更高的设置自由度，支持表单外的**自定义矿池**，并且可以自由设置矿机与服务器的连接，服务器与矿池的连接，以及抽水矿池的连接，三种连接方式。
 
-![image-20211230112835466](D:\program\go_program\tax-miner-proxy\images\high.jpg)
+![image-20211230112835466](images\high.jpg)
 
 其中，请注意，TCP矿池必须关掉**转发矿池ssl连接**，而使用TCP矿池时是否打开**矿机SSL连接**模式取决于**矿机**是否以SSL方式连接服务器！
 
-矿机与服务器的连接： ![image-20211230113136970](C:\Users\10067\AppData\Roaming\Typora\typora-user-images\image-20211230113136970.png)
+矿机与服务器的连接： ![image-20211230113136970](images\image-20211230113136970.png)
 
-服务器与矿池的连接：![image-20211230113053340](D:\program\go_program\tax-miner-proxy\images\image-20211230113053340.png)
+服务器与矿池的连接：![image-20211230113053340](images\image-20211230113053340.png)
 
-抽水矿池的连接：![image-20211230113146331](C:\Users\10067\AppData\Roaming\Typora\typora-user-images\image-20211230113146331.png)
+抽水矿池的连接：![image-20211230113146331](images\image-20211230113146331.png)
 
 ### 3. 启动
 
 在命令行输入刚才生成的指令启动服务，启动后会提示本地监听端口，抽水比例等，并且会提示上线的机器的ip和矿机名。
 
-![image-20220101021438460](D:\program\go_program\tax-miner-proxy\images\image-20220101021438460.png)
+![image-20220101021438460](images\image-20220101021438460.png)
 
 启动后，会循环刷新当前在线的矿机数量，后上线的矿机也会提示启动。
 
-![image-20220101021345829](D:\program\go_program\tax-miner-proxy\images\image-20220101021345829.png)
+![image-20220101021345829](images\image-20220101021345829.png)
 
 ## 附加解释和使用示例
 
@@ -182,4 +182,4 @@ Tel群：
 
 QQ群：
 
-![img](D:\program\go_program\tax-miner-proxy\images\5F3770823116805BD19F0824CA298A78.jpg)
+![img](images\5F3770823116805BD19F0824CA298A78.jpg)
