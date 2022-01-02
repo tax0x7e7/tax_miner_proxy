@@ -29,7 +29,7 @@
    下载好项目后：
 
    ```
-   cd tax_miner_proxy_master/linux
+   cd tax_miner_proxy/linux
    ```
 
    之后按照**命令启动**
@@ -115,13 +115,13 @@
 前台启动：
 
 ```bash
-./go.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100，支持浮点数)
+./tax.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100，支持浮点数)
 ```
 
 后台启动：
 
 ```bash
-nohup ./go.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100的，支持浮点数) &
+nohup ./tax.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100的，支持浮点数) &
 ```
 
 ##### 连接TCP矿池(币印鱼池)，并使用本地ssl加密(需要矿机端配合ssl模式连接)
@@ -129,7 +129,7 @@ nohup ./go.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -
 以币印为例：
 
 ```bash
-./go.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -eth_addr 抽水钱包地址 -devfee_rate 5(抽水百分比，0到100，支持浮点数)
+./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -eth_addr 抽水钱包地址 -devfee_rate 5(抽水百分比，0到100，支持浮点数)
 ```
 
 注意，默认情况下，不填写**devfee_addr**抽水矿池地址时，使用中转矿池地址作为抽水矿池
@@ -139,31 +139,31 @@ nohup ./go.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -
 中转**TCP**矿池并且本地加密的同时，在**SSL矿池**进行抽水**(需要矿机端配合ssl模式连接)**：
 
 ```bash
-./go.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -devfee_rate 5
+./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -devfee_rate 5
 ```
 
 中转**TCP**矿池并且无加密的同时，在**SSL矿池**进行抽水：
 
 ```bash
-./go.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -enable_devfee_ssl -devfee_rate 5
+./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -enable_devfee_ssl -devfee_rate 5
 ```
 
 中转**SSL矿池**的同时，在**SSL矿池**进行抽水：
 
 ```bash
-./go.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -enable_devfee_ssl -eth_addr 抽水钱包地址 -devfee_rate 5
+./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -enable_devfee_ssl -eth_addr 抽水钱包地址 -devfee_rate 5
 ```
 
 中转**SSL矿池**的同时，在**TCP矿池**进行抽水：
 
 ```bash
-./go.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr eth.ss.poolin.me:443 -eth_addr 抽水钱包地址 -devfee_rate 5
+./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr eth.ss.poolin.me:443 -eth_addr 抽水钱包地址 -devfee_rate 5
 ```
 
 ##### 仅做转发使用，不抽水
 
 ```
-./go.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl 
+./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl 
 ```
 
 ### 3. 注意点
