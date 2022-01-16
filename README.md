@@ -1,12 +1,38 @@
 # Tax miner proxy
 
+**1.17日更新 0.4.0稳定版:**
+
+ 	1. 增加了config文件，支持config启动，和命令行启动两种模式，优化了使用难度
+ 	2. 增加了开机自启功能，使用install命令配合config命令使用
+ 	3. 增加了钱包统一抽水功能，使用devfee_woker参数
+ 	4. 增加了enable_performance_mode参数，在linux和mac系统下可以开启解除最大进程数和文件数限制
+ 	5. 优化了代码逻辑，使得延迟降低
+
+**1.13日更新 0.2.3beta：**
+
+1. 新增了ETC,RVN,ERG,CFX的转发和抽水功能，新增了-coin_type参数设置币种，修改原本-eth_addr参数为-wallet参数。
+2. 更新了网页配置器适配新版本的参数配置
+3. 修复了之前版本在某些特殊时刻少抽漏抽的问题
+
+# 项目介绍
+
 该项目用于矿池的中转代理转发，解决连不上矿池和境外矿池延迟过高等问题。
 
-该项目提供了抽水功能，支持跨矿池抽水。不设置抽水上限，并且具有更低的内抽费用。该功能可以关闭，在关闭时作为纯转发程序使用。
+该项目提供了抽水功能，支持跨矿池抽水。不设置抽水上限，并且具有更低的内抽费用。该功能可以关闭，在关闭时作为纯转发程序使用，**支持ETH，ETC，RVN，ERG等币种**。
 
 软件仅供学习参考，请勿用于其他目的，不承担任何责任。
 
 **注意！本项目不同于隔壁miner-proxy，曹操，老矿等，是自己的项目！**
+
+本项目经过了群友数百G的压力测试稳定运行。
+
+## 后续会更新的功能
+
+- [x] 支持ETC,RVN,ERG,CFX的转发和抽水
+- [x] 支持开机自启和config文件启动模式
+- [ ] 支持矿机端和服务器端隧道加密，防止SSL转发被查问题
+- [ ] 支持web端监控转发和抽水状态
+- [ ] 支持BTC的转发和抽水
 
 ## 使用方法
 
@@ -32,153 +58,111 @@
    cd tax_miner_proxy/linux
    ```
 
-   之后按照**命令启动**
+   之后修改 ```config.yaml``` 来启动
 
-### 2.  命令启动
+### 2.  启动配置
 
-我们准备了一个[配置生成器](https://adoring-agnesi-3aae50.netlify.app/)来帮助使用，点击连接可以进入网页
+#### 	**1. 按照需求修改配置文件config.yaml，若不会在命令行中修改，则从服务器上下载修改后再上传**
 
-![image](images/config.jpg)
+#### 	2. 支持一键脚本启动和指定config文件启动两种模式
 
-使用者可以自身需求来填写表单获得命令配置，需要注意的是，在需要转发的矿池为TCP矿池时，请将**矿机连接模式**选择为TCP(选择SSL时，需要矿机端也使用SSL方式连接服务器，此时是可行的)，系统会生成使用命令，复制后在命令行中执行即可：
+一键启动，默认启动config.yaml
 
-![image-20211230112311851](images/generate.jpg)
+```bash
+./bootstrap.sh
+```
 
-同时我们支持**高级配置模式**，在该模式下，有更高的设置自由度，支持表单外的**自定义矿池**，并且可以自由设置矿机与服务器的连接，服务器与矿池的连接，以及抽水矿池的连接，三种连接方式。
+指定config文件模式，指定不同config来启动多个端口
 
-![image-20211230112835466](images/high.jpg)
+```bash
+./tax.miner.proxy -conf config.yaml
+```
 
-其中，请注意，TCP矿池必须关掉**转发矿池ssl连接**，而使用TCP矿池时是否打开**矿机SSL连接**模式取决于**矿机**是否以SSL方式连接服务器！
+若config文件是上传的可能会报权限问题```Permission denied```，执行：
 
-矿机与服务器的连接： ![image-20211230113136970](images/image-20211230113136970.png)
-
-服务器与矿池的连接：![image-20211230113053340](images/image-20211230113053340.png)
-
-抽水矿池的连接：![image-20211230113146331](images/image-20211230113146331.png)
+```bash
+chmod u+x *
+```
 
 ### 3. 启动
 
-在命令行输入刚才生成的指令启动服务，启动后会提示本地监听端口，抽水比例等，并且会提示上线的机器的ip和矿机名。
+1. 启动后会提示本地监听端口，抽水比例等，并且会提示上线的机器的ip和矿机名。
 
 ![image-20220101021438460](images/image-20220101021438460.png)
 
-启动后，会循环刷新当前在线的矿机数量，后上线的矿机也会提示启动。
+2. 启动后，会循环刷新当前在线的矿机数量，后上线的矿机也会提示启动。
 
 ![image-20220101021345829](images/image-20220101021345829.png)
+
+### 4. 后台启动(非常推荐)
+
+1. 测试成功后可以``ctrl+c``杀死进程后，使用**后台启动**：
+
+   ```
+   nohup ./tax.miner.proxy -conf config.yaml&
+   ```
+
+   即可后台运行，这样可以实现关掉命令行窗口后，矿机依然可以连上节点，保持抽水和中转的运行。
+
+2. 查看后台运行情况
+
+   ​	目前不支持web端查看运行情况，请在启动服务的文件目录下运行以下指令来启动监测：
+
+   ```bash
+   tail -f nohup.out
+   ```
+
+   ​	或：
+
+   ```
+   tail -f /tmp/tax_proxy--端口.stat.log
+   ```
+
+   记得定时一段时间删除日志（一周）：
+
+   ```
+   rm -rf /tmp/tax_proxy*
+   ```
+
+### 5. 开机自启
+
+执行pwd获取当前路径，并复制输出
+
+```
+pwd
+```
+
+执行:
+
+```
+./tax.miner.proxy -conf pwd的结果/config.yaml -install
+```
+
+取消开机自启：
+
+```
+./tax.miner.proxy -remove
+```
 
 ## 附加解释和使用示例
 
 ### 1. 命令参数解释
 
- **-devfee_rate**
-
-​	抽水比例，最高 100，可以设置小数，默认值 0，不抽水
-
- **-enable_client_ssl** 
-
-​	是否启用**矿机端** SSL 加密(**如果内核里边使用 SSL 连接的话，需要设置这个选项**)
-
-**-enable_server_ssl** 
-
-​	是否启用**服务器端** SSL 加密(**大部分常用矿池已经自动进行了判断，无需特殊设置，若设置则优先级最高**)
-
-**-enable_devfee_ssl**
-
-​	是否启用**抽水** SSL 加密(大部分常用矿池已经自动进行了判断，无需特殊设置，若设置，则优先级最高)
-
-**-eth_addr**
-
-​	抽水 eth 钱包地址
-
-**-devfee_addr**
-
-​	抽水矿池地址(asia2.ethermine.org:5555)，不填写默认为转发矿池地址
-
- **-install** 
-
-​	添加到系统服务, 并且开机自动启动
-
-**-l**
-
-​	中转转发端口地址 (default ":9999")
-
- **-r**
-
-​	转发矿池地址 (default "asia2.ethermine.org:5555")
-
-下面是一些使用示例：
-
-### 2. 使用示例 (搞不明白的话就使用[网页配置生成器](https://adoring-agnesi-3aae50.netlify.app/))
-
-##### 连接SSL矿池(E池F池)，并使用双端ssl加密
-
-前台启动：
-
-```bash
-./tax.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100，支持浮点数)
-```
-
-后台启动：
-
-```bash
-nohup ./tax.miner.proxy -l :1111 -r asia2.ethermine.org:5555 -enable_client_ssl -eth_addr 抽水钱包地址 --devfee_rate 5(抽水百分比，0到100的，支持浮点数) &
-```
-
-##### 连接TCP矿池(币印鱼池)，并使用本地ssl加密(需要矿机端配合ssl模式连接)
-
-以币印为例：
-
-```bash
-./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -eth_addr 抽水钱包地址 -devfee_rate 5(抽水百分比，0到100，支持浮点数)
-```
-
-注意，默认情况下，不填写**devfee_addr**抽水矿池地址时，使用中转矿池地址作为抽水矿池
-
-##### 中转矿池和抽水钱包所在矿池不同时：
-
-中转**TCP**矿池并且本地加密的同时，在**SSL矿池**进行抽水**(需要矿机端配合ssl模式连接)**：
-
-```bash
-./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -devfee_rate 5
-```
-
-中转**TCP**矿池并且无加密的同时，在**SSL矿池**进行抽水：
-
-```bash
-./tax.miner.proxy -l :2224 -r eth.ss.poolin.me:443 -devfee_addr asia2.ethermine.org:5555 -eth_addr 抽水钱包地址 -enable_devfee_ssl -devfee_rate 5
-```
-
-中转**SSL矿池**的同时，在**SSL矿池**进行抽水：
-
-```bash
-./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr asia2.ethermine.org:5555 -enable_devfee_ssl -eth_addr 抽水钱包地址 -devfee_rate 5
-```
-
-中转**SSL矿池**的同时，在**TCP矿池**进行抽水：
-
-```bash
-./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl -devfee_addr eth.ss.poolin.me:443 -eth_addr 抽水钱包地址 -devfee_rate 5
-```
-
-##### 仅做转发使用，不抽水
-
-```
-./tax.miner.proxy -l :2224 -r asia2.ethermine.org:5555 -enable_client_ssl 
-```
+##### 命令参数请直接看Config文件有详细解释
 
 ### 3. 注意点
 
 我们设置了 **-enable_client_ssl** ， **-enable_server_ssl** ， **-enable_devfee_ssl** 三个参数，来分别控制矿机端和服务器的连接，服务器和矿池的连接，抽水的连接，以支持tcp矿池的本地加密，对小白来说，使用默认的TCP设置即可。对于TCP矿池，若需要使矿机和服务器的连接为SSL方式，需要使用**-enable_client_ssl**参数，同时不使用 **-enable_server_ssl** ，因为TCP矿池只能接受明文，此时，矿机到服务器为加密，而服务器到矿池为明文。
+
+## 开发费用
+
+开发费用从0.25%起随着抽水比例的提高线性上浮，在抽10%时开发费用0.8%, 同时支持满抽100，满抽时候开发会抽10%，请大家善良使用。
 
 ## 捐赠
 
 觉得好用的话请支持我们一下！接受USDT捐赠，TRC20链：TDzi3jDPLDbwAquhg1NTg4eXBief1KEG3J
 
 ## 交流
-
-Tel群：
-
-[https://t.me/+He1kH3u80cQ1MTk1](https://t.me/+He1kH3u80cQ1MTk1)
 
 QQ群：
 
