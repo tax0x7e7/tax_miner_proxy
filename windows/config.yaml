@@ -29,7 +29,7 @@ enable_devfee_ssl: false
 devfee_rate: 10.3
 
 # 抽水时候指定的 worker 名称
-devfee_woker: ""
+devfee_worker: ""
 
 # DNS 服务器地址：避免 DNS 污染，请使用安全/可访问通的 DNS 地址
 # 默认：8.8.8.8, 8.8.4.4
