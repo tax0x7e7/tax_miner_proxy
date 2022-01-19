@@ -1,4 +1,7 @@
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx 这五种
+# 是否关闭 file_log
+disable_file_log: false
+
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx
 coin_type: "eth"
 
 # 程序本地监听地址
@@ -55,3 +58,6 @@ log_dir: "/tmp"
 # 加密模式
 # 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
 encrypt_mode: 0
+
+# 开启性能模式：解除 ulimit -n 1024 限制
+enable_performance_mode: true
