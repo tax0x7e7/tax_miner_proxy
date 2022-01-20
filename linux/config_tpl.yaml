@@ -1,7 +1,7 @@
 # 是否关闭 file_log
 disable_file_log: false
 
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc
 coin_type: "eth"
 
 # 程序本地监听地址
