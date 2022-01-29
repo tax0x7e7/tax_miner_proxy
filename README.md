@@ -180,12 +180,9 @@ chmod u+x *
 
 2. 查看后台运行情况
 
-   ```
+   ```bash
 tail -f /tmp/tax_proxy--端口.stat.log
    ```
-   
-
-
 
 ### 5. 开机自启
 
