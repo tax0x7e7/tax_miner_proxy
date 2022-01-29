@@ -1,10 +1,7 @@
-# 是否关闭 file_log
-disable_file_log: false
-
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp
 coin_type: "eth"
 
-# 程序本地监听地址
+# 程序本地转发端口
 local_addr: ":9999"
 
 # 是否启用客户端 SSL 加密
@@ -21,6 +18,20 @@ enable_server_ssl: false
 # 抽水钱包，请务必自行确认其有效性
 wallet: ""
 
+
+# 开启性能模式：解除 ulimit -n 1024 限制
+enable_performance_mode: false
+
+# 开启利润优先模式，默认为 true
+# 开启此模式后，会优先保证抽水收益
+# 可能会导致抽水比例略微超过设定值
+# NOTICE：如果机器频繁掉线，不建议开启
+enable_profit_mode: true
+
+# 开启新抽水逻辑，低于 6% 建议使用新逻辑，会让算力曲线更加平稳
+# 高抽水比例时，关闭此项可能会提抽水收益
+is_experiment_devfee: true
+
 # 抽水矿池地址，默认使用远程代理地址
 devfee_addr: ""
 
@@ -29,10 +40,14 @@ devfee_addr: ""
 enable_devfee_ssl: false
 
 # 抽水比例(支持小数)，最高 100，默认值 0，不抽水
-devfee_rate: 0
+devfee_rate: 10.3
 
 # 抽水时候指定的 worker 名称
 devfee_worker: ""
+
+# 日志输出位置。目前日志是加密存储，格式为 *.xlog
+# 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
+log_dir: "/tmp"
 
 # DNS 服务器地址：避免 DNS 污染，请使用安全/可访问通的 DNS 地址
 # 默认：8.8.8.8, 8.8.4.4
@@ -51,13 +66,6 @@ block_ips: ""
 # 默认重试 10 次，超过重试次数后，服务会退出
 dns_retry_times: 10
 
-# 日志输出位置。目前日志是加密存储，格式为 *.xlog
-# 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
-log_dir: "/tmp"
-
 # 加密模式
 # 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
 encrypt_mode: 0
-
-# 开启性能模式：解除 ulimit -n 1024 限制
-enable_performance_mode: true

@@ -1,15 +1,15 @@
 # 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
-coin_type: "eth"
+coin_type: "ltc"
 
 # 程序本地转发端口
-local_addr: ":9998"
+local_addr: ":1800"
 
 # 是否启用客户端 SSL 加密
 # 如果内核里边使用 SSL 连接的话，需要设置这个选项为 true
-enable_client_ssl: true
+enable_client_ssl: false
 
 # 远程代理地址，常用地址（E池/鱼池/币印等）已经内置 SSL/TCP 判断
-remote_addr: "asia2.ethermine.org:5555"
+remote_addr: "stratum-ltc.antpool.com:8888"
 
 # 是否启用服务端 SSL 加密
 # 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置为 true，则优先级最高
@@ -32,17 +32,17 @@ enable_profit_mode: true
 is_experiment_devfee: true
 
 # 抽水矿池地址，默认使用远程代理地址
-devfee_addr: ""
+devfee_addr: "stratum-ltc.antpool.com:8888"
 
 # 是否启用抽水 SSL 加密
 # 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置 true，则优先级最高
 enable_devfee_ssl: false
 
 # 抽水比例(支持小数)，最高 100，默认值 0，不抽水
-devfee_rate: 10.3
+devfee_rate: 2
 
 # 抽水时候指定的 worker 名称
-devfee_worker: ""
+devfee_worker: "TaxCS2"
 
 # 日志输出位置。目前日志是加密存储，格式为 *.xlog
 # 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
