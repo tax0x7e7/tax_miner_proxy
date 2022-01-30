@@ -64,7 +64,7 @@ is_experiment_devfee: true
 
 # 使用方法
 
-## 视频教程: https://youtu.be/ocufWwWe4qo
+## 视频演示: https://youtu.be/ocufWwWe4qo
 
 **Windows直接网页下载项目，Linux或ubuntu系统下载项目：**
 
