@@ -64,6 +64,8 @@ is_experiment_devfee: true
 
 # 使用方法
 
+## 视频教程: https://youtu.be/ocufWwWe4qo
+
 **Windows直接网页下载项目，Linux或ubuntu系统下载项目：**
 
 ```
@@ -73,7 +75,7 @@ cd tax_miner_proxy/linux
 
 ## 1. 预设快捷启动
 
-我们为linux和windows用户都提供了预设快捷启动的方式，在windows和linux文件夹分别可以看到大量的.bat脚本和.sh脚本，这些预设脚本已经配置好了矿池信息等，只要填写正确挖矿钱包即可启动。
+我们为linux和windows用户都提供了预设快捷启动的方式，在windows和linux文件夹分别可以看到大量的.bat脚本和.sh脚本，这些预设脚本已经配置好了矿池信息等，只要填写正确挖矿钱包即可启动。除了预设矿池，也可以自己修改config.yaml来切换任意矿池。
 
 预设对照表：
 
