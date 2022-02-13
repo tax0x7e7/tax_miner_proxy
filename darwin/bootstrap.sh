@@ -1,7 +1,7 @@
 #!/bin/bash
 CURDIR=$(cd "$(dirname $0)" || exit; pwd)
 
-CONF_FILE=$CURDIR/config.yaml
+CONF_FILE=$CURDIR/config/config.yaml
 
 args=""
 
