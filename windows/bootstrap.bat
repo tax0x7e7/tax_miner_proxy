@@ -1,2 +1,2 @@
-tax.miner.proxy -conf config.yaml
+tax.miner.proxy -conf config/config.yaml
 pause
