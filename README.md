@@ -2,7 +2,7 @@
 
 ### 稳定，0拒绝率的 BTC ETH LTC中转+抽水器
 
-![](images\1644855681.jpg)
+![](images/1644855681.jpg)
 
 **2.14更新1.1.0(新增网页端)**
 
@@ -65,7 +65,7 @@ git clone https://github.com/tax0x7e7/tax_miner_proxy.git
 cd tax_miner_proxy/linux
 ```
 
-修改config.yaml文件
+**修改config.yaml文件**
 
 ```bash
 # 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
@@ -119,7 +119,7 @@ dashboard_admin_token: "tax-yyds"
 dashboard_observer_token: "tax-yyds"
 ```
 
-启动：
+**启动：**
 
 ```
 ./tax.miner.proxy -conf config.yaml
