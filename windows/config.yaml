@@ -1,7 +1,7 @@
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp
 coin_type: "eth"
 
-# 程序本地转发端口
+# 程序本地转发地址
 local_addr: ":9998"
 
 # 是否启用客户端 SSL 加密
@@ -44,9 +44,26 @@ devfee_rate: 10.3
 # 抽水时候指定的 worker 名称
 devfee_worker: ""
 
-# 日志输出位置。目前日志是加密存储，格式为 *.xlog
+# 程序本地地址, 格式同 local_addr
+# 默认为空, 表示不开启管理后台
+dashboard_addr: ""
+
+# 管理员 token
+dashboard_admin_token: "tax-yyds"
+
+# 观察者 token
+dashboard_observer_token: "tax-yyds"
+
+# 日志输出位置, 目前日志是加密存储，格式为 *.xlog
 # 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
 log_dir: "/tmp"
+
+# 详细日志采样级别，用于开发者排查问题使用, 日常使用建议设置为 0
+# 0: 不开启详细日志采样
+# 1: 记录 0.1% 日志采样
+# 2: 记录 1% 日志采样
+# 3: 全量日志记录，当机器数量超过 50 时候，当心磁盘存不下
+log_sampling_level: 0
 
 
 
