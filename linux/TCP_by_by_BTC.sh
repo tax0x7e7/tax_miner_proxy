@@ -1,7 +1,7 @@
 #!/bin/bash
 CURDIR=$(cd "$(dirname $0)" || exit; pwd)
 
-CONF_FILE=$CURDIR/config/TCP_by_by_LTC.yaml
+CONF_FILE=$CURDIR/config/TCP_by_by_BTC.yaml
 
 args=""
 
