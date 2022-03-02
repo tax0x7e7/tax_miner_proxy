@@ -126,20 +126,20 @@ dashboard_observer_token: "tax-yyds"
 
 设置好后，用config文件启动服务后，使用 ```服务器ip:端口```来访问web端监控，会提示输入token，可以给管理员和观察者设置不同token来进入不同观察模式：
 
-![](images\1644855681.jpg)
+![](images/1644855681.jpg)
 
 进入后会看到启动配置的详细信息：
 
-![](images\2.jpg)
+![](images/2.jpg)
 
 进入矿工管理页面可以看到现在的矿工的ip和worker：
 
-![](D:\program\go_program\tax-miner-proxy\images\3.jpg)
+![](images/3.jpg)
 
 对观察者来说，只能看到online状态，对管理员可以看到抽水/online状态：
 
-![](D:\program\go_program\tax-miner-proxy\images\5.png)
+![](images/5.png)
 
 在用户配置页面可以修改访问的token，包括管理员和观察者
 
-![](D:\program\go_program\tax-miner-proxy\images\4.png)
+![](images/4.png)
