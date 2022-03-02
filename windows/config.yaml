@@ -1,4 +1,4 @@
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/bch/ton
 coin_type: "eth"
 
 # 程序本地转发地址
@@ -15,8 +15,18 @@ remote_addr: "asia2.ethermine.org:5555"
 # 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置为 true，则优先级最高
 enable_server_ssl: false
 
-# 抽水钱包，请务必自行确认其有效性
+# 抽水钱包，请务必自行确认其有效性（优先级低于 wallets 参数，不会 merge）
 wallet: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 多人抽水能力支持，当存在 wallets 时候，会覆盖 wallet 参数
+# shares 仅支持整数，且所有 shares 的和应为 (0,10]，超出范围会直接终止程序运行（注意前开后闭）
+# shares 为 0 意味暂时不为该地址就行 shares 分配，请知悉
+wallets:
+  - content: "0xxxxxxxxx001"
+    shares: 1
+  - content: "0xxxxxxxxx002"
+    shares: 1
+
 
 # 开启性能模式：解除 ulimit -n 1024 限制
 enable_performance_mode: false
@@ -54,8 +64,13 @@ dashboard_admin_token: "tax-yyds"
 # 观察者 token
 dashboard_observer_token: "tax-yyds"
 
+# debug 模式，如遇到异常情况，请开启 debug 模式，并反馈日志给开发者
+# 正常情况不要开启，会导致日志量增加非常多，导致硬盘爆掉
+enable_debug: false
+
 # 日志输出位置, 目前日志是加密存储，格式为 *.xlog
 # 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
+# 请尽量使用绝对路径
 log_dir: "/tmp"
 
 # 详细日志采样级别，用于开发者排查问题使用, 日常使用建议设置为 0
@@ -83,6 +98,11 @@ block_ips: ""
 # 随后将重新向 DNS 发起解析请求
 # 默认重试 10 次，超过重试次数后，服务会退出
 dns_retry_times: 10
+
+# IP可连接性校验时长（单位：秒）
+# 目前会校验矿池 IP 的可连接性，如规定时间内未能成功连接，则认为该 IP 不可用
+# 默认 1s，0 表示不校验
+dns_ip_verify_seconds: 1
 
 # 加密模式
 # 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
