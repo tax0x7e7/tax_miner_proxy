@@ -54,21 +54,25 @@
 
 ## Liunx一键管理工具 包含安装/启动/停止/删除
 
-**linux版本**
+**执行命令生成 管理控制脚本**
 
 ```
-bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/linux/tools.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/gen.sh)
 ```
 
-**加密盒子arm64版本 （给专业机转ssl加密用）**
+**反复执行上面的命令，输入不同路径，可以生成多个不同的管理脚本，控制多个矿池链接：**
 
+![](images/path.jpg)
+
+**根据提示启动管理控制脚本，不同名字的管理脚本控制不同矿池链接：**
+
+**管理控制脚本：**
+
+```bash
+/root/tax-miner-proxy-tax-linux.sh
 ```
-bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tools.sh)
-```
 
-安装后，**修改config文件夹下的config.yaml文件，改成你需要的矿池和钱包**，再启动
-
-一键管理工具若要启动多个矿池，请参考: [详细文档](start.md)，或者使用手动安装
+安装后，**修改config文件夹下的config.yaml文件，改成你需要的矿池和钱包**，再通过管理脚本来启动服务。
 
 ## 手动安装
 
