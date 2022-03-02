@@ -52,7 +52,21 @@
 
 # 使用方法
 
-## 一键脚本
+## Liunx一键管理工具 包含安装/启动/停止/删除
+
+**linux版本**
+
+```
+bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/linux/tools.sh)
+```
+
+**加密盒子arm64版本**
+
+```
+bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tools.sh)
+```
+
+一键管理工具若要启动多个矿池，请参考: [详细文档](start.md)，或者使用手动安装
 
 ## 手动安装
 
