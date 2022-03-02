@@ -60,11 +60,13 @@
 bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/linux/tools.sh)
 ```
 
-**加密盒子arm64版本**
+**加密盒子arm64版本 （给专业机转ssl加密用）**
 
 ```
 bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tools.sh)
 ```
+
+安装后，**修改config文件夹下的config.yaml文件，改成你需要的矿池和钱包**，再启动
 
 一键管理工具若要启动多个矿池，请参考: [详细文档](start.md)，或者使用手动安装
 
@@ -77,7 +79,7 @@ git clone https://github.com/tax0x7e7/tax_miner_proxy.git
 cd tax_miner_proxy/linux
 ```
 
-修改config文件夹下的config.yaml文件
+**修改config文件夹下的config.yaml文件**
 
 ```bash
 # 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
