@@ -21,7 +21,7 @@ else
     echo "此脚本不支持该系统" && exit 1
 fi
 
-install() {
+download() {
     if [ -d "$dirname" ]; then
         echo -e "您已安装了 tax_miner_proxy, 如果确定没有安装,请输入rm -rf $dirname" && exit 1
     fi
