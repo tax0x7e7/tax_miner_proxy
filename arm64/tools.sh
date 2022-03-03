@@ -30,14 +30,14 @@ download() {
     mkdir -p $dirname/config
 
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tax.miner.proxy -O $dirname/tax.miner.proxy
-    wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/config/config.yaml -O $dirname/config/config.yaml
+    wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/config/config.yaml -O $dirname/config.yaml
 
     echo "下载完成，请在修改默认配置文件后，使用 install 进行系统守护进程的安装"
 
 }
 
 install() {
-      echo "正在使用 $dirname/config/config.yaml 中的配置"
+      echo "正在使用 $dirname/config.yaml 中的配置"
 
       chmod 777 $dirname/tax.miner.proxy
 
@@ -45,12 +45,12 @@ install() {
 
       cd $dirname
 
-      echo "正在移除旧的进程守护配置文件，这部分失败了也不用担心..."
+      echo "正在移除旧的进程守护配置文件，这部分失败了需要手动去 /etc/systemd/system 中删除一下"
       echo "--------->>>>>>>>>>移除旧配置文件<<<<<<<<<<<<<<<<------------"
-      ./tax.miner.proxy -conf $dirname/config/config.yaml --remove
+      ./tax.miner.proxy -conf $dirname/config.yaml --remove
       echo "--------->>>>>>>>>>移除旧配置文件<<<<<<<<<<<<<<<<------------"
       echo "旧系统配置文件移除成功"
-      ./tax.miner.proxy -conf $dirname/config/config.yaml --install
+      ./tax.miner.proxy -conf $dirname/config.yaml --install
       sleep 1s
 
       echo "系统自启动服务安装成功，如果需要启动，请使用 start 命令"
@@ -62,8 +62,8 @@ uninstall() {
     else
         if [ "$flag" = "yes" -o "$flag" = "ye" -o "$flag" = "y" ]; then
             cd $dirname
-            ./tax.miner.proxy -conf $dirname/config/config.yaml --stop
-            ./tax.miner.proxy -conf $dirname/config/config.yaml --remove
+            ./tax.miner.proxy -conf $dirname/config.yaml --stop
+            ./tax.miner.proxy -conf $dirname/config.yaml --remove
             rm -rf $dirname
             echo "卸载tax.miner.proxy成功"
         fi
@@ -71,7 +71,7 @@ uninstall() {
 }
 start() {
     cd $dirname
-    ./tax.miner.proxy -conf $dirname/config/config.yaml --start
+    ./tax.miner.proxy -conf $dirname/config.yaml --start
 
     echo "tax.miner.proxy启动成功"
 }
@@ -79,25 +79,25 @@ start() {
 
 restart() {
     cd $dirname
-    ./tax.miner.proxy -conf $dirname/config/config.yaml --restart
+    ./tax.miner.proxy -conf $dirname/config.yaml --restart
 
     echo "tax.miner.proxy已重新启动"
 }
 stat() {
     cd $dirname
-    ./tax.miner.proxy -conf $dirname/config/config.yaml --stat
+    ./tax.miner.proxy -conf $dirname/config.yaml --stat
 
 }
 
 stop() {
      cd $dirname
-     ./tax.miner.proxy -conf $dirname/config/config.yaml --stop
+     ./tax.miner.proxy -conf $dirname/config.yaml --stop
      echo "tax.miner.proxy 已停止"
 }
 
 echo "======================================================="
 echo "tax.miner.proxy 一键工具"
-echo "  0、下载(下载到$dirname，务必在下载后，修改 $dirname/config/config.yaml)"
+echo "  0、下载(下载到$dirname，务必在下载后，修改 $dirname/config.yaml)"
 echo "  1、安装进程守护（务必在下载后，修改 ）"
 echo "  2、卸载（移除 tax.miner.proxy）"
 echo "  3、启动（安装后默认使用 systemd 进行进程守护，并进行启动）"
