@@ -26,8 +26,9 @@ download() {
         echo -e "您已安装了 tax_miner_proxy, 如果确定没有安装,请输入rm -rf $dirname" && exit 1
     fi
     $cmd update -y
+    
     $cmd install curl wget -y
-
+    mkdir -p $dirname
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/linux/tax.miner.proxy -O $dirname/tax.miner.proxy
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/linux/config.yaml -O $dirname/config.yaml
 
