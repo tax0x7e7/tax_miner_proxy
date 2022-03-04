@@ -41,7 +41,7 @@ install() {
     read -p "$(echo -e "下载完成，请输入目录后缀来管理不同矿池，例如 1,2,3 ：" )" suffix
     sed "s/\/root\/tax_miner_proxy/\/root\/tax_miner_proxy-$suffix/g" /tmp/tax-miner-proxy.sh  > /root/tax-miner-proxy-"$suffix"-"$arch".sh
     chmod u+x /root/tax-miner-proxy-"$suffix"-"$arch".sh
-    echo "tools 管理脚本生成成功，请查看：/root/tax-miner-proxy-$suffix-$arch.sh，请以后使用该脚本管理该矿池"
+    echo "tools 管理脚本生成成功，请查看：/root/tax-miner-proxy-$suffix-$arch.sh，请使用该脚本管理当前矿池"
 }
 
 install
