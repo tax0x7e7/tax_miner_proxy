@@ -27,7 +27,8 @@ download() {
     fi
     $cmd update -y
     $cmd install curl wget -y
-
+    
+    mkdir -p $dirname
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tax.miner.proxy -O $dirname/tax.miner.proxy
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/config.yaml -O $dirname/config.yaml
 
