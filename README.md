@@ -72,7 +72,7 @@ bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/mas
 /root/tax-miner-proxy-tax-linux.sh
 ```
 
-安装后，**修改config文件夹下的config.yaml文件，改成你需要的矿池和钱包**，再通过管理脚本来启动服务。
+安装后，**修改config.yaml文件，改成你需要的矿池和钱包**，再通过管理脚本来启动服务。
 
 ## 手动安装
 
@@ -83,7 +83,7 @@ git clone https://github.com/tax0x7e7/tax_miner_proxy.git
 cd tax_miner_proxy/linux
 ```
 
-**修改config文件夹下的config.yaml文件**
+**修改config.yaml文件**
 
 ```bash
 # 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
@@ -152,7 +152,7 @@ dashboard_observer_token: "tax-yyds"
 启动：
 
 ```
-./tax.miner.proxy -conf config/config.yaml
+./tax.miner.proxy -conf config.yaml
 ```
 
 #### 后台启动、进程守护、开机自启使用请看：[详细文档](start.md)
