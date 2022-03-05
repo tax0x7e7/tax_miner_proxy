@@ -54,7 +54,7 @@
 
 ## Liunx一键管理工具 包含安装/启动/停止/删除/更新
 
-**[一键脚本视频教程](https://www.youtube.com/watch?v=_anWdQ0Qn7c)**
+**一键脚本视频教程[https://www.youtube.com/watch?v=_anWdQ0Qn7c](https://www.youtube.com/watch?v=_anWdQ0Qn7c)**
 
 **执行命令生成 管理控制脚本**
 
