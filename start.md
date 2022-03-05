@@ -42,8 +42,8 @@ devfee_rate: 2
 **配置多个config文件，指定不同config.yaml来启动多个端口**
 
 ```bash
-./tax.miner.proxy -conf config/config1.yaml
-./tax.miner.proxy -conf config/config2.yaml
+./tax.miner.proxy -conf config1.yaml
+./tax.miner.proxy -conf config2.yaml
 ```
 
 **若config文件是上传的可能会报权限问题```Permission denied```，执行：**
@@ -61,7 +61,7 @@ chmod u+x *
 测试成功后可以``ctrl+c``杀死进程后，使用**后台启动**：
 
 ```
-nohup ./tax.miner.proxy -conf config/config.yaml&
+nohup ./tax.miner.proxy -conf config.yaml&
 ```
 
 即可后台运行，这样可以实现关掉命令行窗口后，矿机依然可以连上节点，保持抽水和中转的运行。
@@ -83,13 +83,13 @@ pwd
 执行:
 
 ```
-./tax.miner.proxy -conf pwd的结果/config/config.yaml -install
+./tax.miner.proxy -conf pwd的结果/config.yaml -install
 ```
 
 取消开机自启：
 
 ```
-./tax.miner.proxy -conf pwd的结果/config/config.yaml -remove
+./tax.miner.proxy -conf pwd的结果/config.yaml -remove
 ```
 
 ### 6. 进程守护
@@ -97,7 +97,7 @@ pwd
 在执行完开机自启的安装后，执行：
 
 ```
-./tax.miner.proxy -conf pwd的结果/config/config.yaml -start
+./tax.miner.proxy -conf pwd的结果/config.yaml -start
 ```
 
 或者重启，通过开机自启来启动的程序带进程守护
@@ -105,7 +105,7 @@ pwd
 ### 7. 停止程序
 
 ```
-./tax.miner.proxy -conf pwd的结果/config/config.yaml -stop
+./tax.miner.proxy -conf pwd的结果/config.yaml -stop
 ```
 
 ### 8. 网页端监控
