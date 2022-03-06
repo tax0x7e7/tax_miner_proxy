@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #>>>>>>>>>>>>>>>>>>> tax.miner.proxy 安装目录配置 <<<<<<<<<<<<<<<<<<<<<<<
-# 默认情况下不要修改，如果需要进行 tax.miner.proxy 多开时候（不熟悉 linux 系统的话，强烈不建议多开）
+# 默认情况下不要修改，如果需要进行 tax.miner.proxy 多开时候（不熟悉 
+系统的话，强烈不建议多开）
 # 复制一份本文件，然后再修改这个路径
 # 不要修改 /root/ 部分， tax_miner_proxy 部分可以修改，但是不要写中文进去
 # 不要直接修改这个文件，不要直接使用默认的监听端口
@@ -26,13 +27,23 @@ download() {
         echo -e "您已安装了 tax_miner_proxy, 如果确定没有安装,请输入rm -rf $dirname" && exit 1
     fi
     $cmd update -y
-    $cmd install curl wget -y
     
+    $cmd install curl wget -y
     mkdir -p $dirname
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tax.miner.proxy -O $dirname/tax.miner.proxy
     wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/config.yaml -O $dirname/config.yaml
 
     echo "下载完成，请在修改默认配置文件后，使用 install 进行系统守护进程的安装"
+
+}
+
+update() {
+    $cmd update -y
+    $cmd install curl wget -y
+
+    wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/arm64/tax.miner.proxy -O $dirname/tax.miner.proxy
+
+    echo "更新完成，请重新执行安装"
 
 }
 
@@ -97,15 +108,16 @@ stop() {
 
 echo "======================================================="
 echo "tax.miner.proxy 一键工具"
-echo "  0、下载(下载到$dirname，务必在下载后，修改 $dirname/config.yaml)"
-echo "  1、安装进程守护（务必在下载后，修改 ）"
+echo "  0、下载程序(下载到$dirname，务必在下载后，修改 $dirname/config.yaml)"
+echo "  1、安装进程守护（务必在下载后，修改config文件，安装后再使用3启动 ）"
 echo "  2、卸载（移除 tax.miner.proxy）"
 echo "  3、启动（安装后默认使用 systemd 进行进程守护，并进行启动）"
 echo "  4、重启（修改完配置文件内容后，请重启）"
 echo "  5、停止（停止tax.miner.proxy 运行）"
 echo "  6、查看运行状态"
+echo "  7、更新"
 echo "======================================================="
-read -p "$(echo -e "请选择[0-6]：")" choose
+read -p "$(echo -e "请选择[0-7]：")" choose
 case $choose in
 0)
     download
@@ -127,6 +139,9 @@ case $choose in
     ;;
 6)
     stat
+    ;;
+7)
+    update
     ;;
 *)
     echo "输入错误请重新输入！"
