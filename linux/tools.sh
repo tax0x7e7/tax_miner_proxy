@@ -107,8 +107,8 @@ stop() {
 
 echo "======================================================="
 echo "tax.miner.proxy 一键工具"
-echo "  0、下载(下载到$dirname，务必在下载后，修改 $dirname/config.yaml)"
-echo "  1、安装（务必在下载后，修改 ）"
+echo "  0、下载程序(下载到$dirname，务必在下载后，修改 $dirname/config.yaml)"
+echo "  1、安装进程守护（务必在下载后，修改config文件，安装后再使用3启动 ）"
 echo "  2、卸载（移除 tax.miner.proxy）"
 echo "  3、启动（安装后默认使用 systemd 进行进程守护，并进行启动）"
 echo "  4、重启（修改完配置文件内容后，请重启）"
@@ -116,7 +116,7 @@ echo "  5、停止（停止tax.miner.proxy 运行）"
 echo "  6、查看运行状态"
 echo "  7、更新"
 echo "======================================================="
-read -p "$(echo -e "请选择[0-6]：")" choose
+read -p "$(echo -e "请选择[0-7]：")" choose
 case $choose in
 0)
     download
