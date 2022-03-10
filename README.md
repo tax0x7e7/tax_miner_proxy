@@ -161,7 +161,7 @@ dashboard_observer_token: "tax-yyds"
 
 #### 后台启动、进程守护、开机自启使用请看：[详细文档](start.md)
 
-## 本地加密端使用方式 
+## 本地加密端使用方式 视频教程[https://youtu.be/eY0PL97-20Y](https://youtu.be/eY0PL97-20Y)
 
 **使用本地端加密时候，服务器启动的config中，加密模式选 “2”**
 
