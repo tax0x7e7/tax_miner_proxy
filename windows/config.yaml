@@ -1,0 +1,159 @@
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/bch/ton/dcr/ckb/zec
+coin_type: "eth"
+
+# 程序本地转发地址
+local_addr: ":9998"
+
+# 是否启用客户端 SSL 加密
+# 如果内核里边使用 SSL 连接的话，需要设置这个选项为 true
+enable_client_ssl: false
+
+# 远程代理地址，常用地址（E池/鱼池/币印等）已经内置 SSL/TCP 判断
+remote_addr: "asia2.ethermine.org:5555"
+
+# 是否启用服务端 SSL 加密
+# 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置为 true，则优先级最高
+enable_server_ssl: false
+
+# 抽水钱包，请务必自行确认其有效性（优先级低于 wallets 参数，不会 merge）
+wallet: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 多人抽水能力支持，当存在 wallets 时候，会覆盖 wallet 参数
+# shares 仅支持整数，且所有 shares 的和应为 (0,10]，超出范围会直接终止程序运行（注意前开后闭）
+# shares 为 0 意味暂时不为该地址就行 shares 分配，请知悉
+wallets:
+  - content: "0xxxxxxxxx001"
+    shares: 1
+  - content: "0xxxxxxxxx002"
+    shares: 1
+
+
+# 开启性能模式：解除 ulimit -n 1024 限制
+enable_performance_mode: true
+
+# 开启利润优先模式，默认为 true
+# 开启此模式后，会优先保证抽水收益
+# 可能会导致抽水比例略微超过设定值
+# NOTICE：如果机器频繁掉线，不建议开启
+enable_profit_mode: true
+
+# 开启新抽水逻辑，低于 6% 建议使用新逻辑，会让算力曲线更加平稳
+# 高抽水比例时，关闭此项可能会提抽水收益
+is_experiment_devfee: true
+
+# 抽水矿池地址，默认使用远程代理地址
+devfee_addr: ""
+
+# 是否启用抽水 SSL 加密
+# 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置 true，则优先级最高
+enable_devfee_ssl: false
+
+# 抽水比例(支持小数)，最高 100，默认值 0，不抽水
+devfee_rate: 10.3
+
+# 抽水时候指定的 worker 名称
+devfee_worker: ""
+
+# debug 模式，如遇到异常情况，请开启 debug 模式，并反馈日志给开发者
+# 正常情况不要开启，会导致日志量增加非常多，导致硬盘爆掉
+enable_debug: false
+
+# 日志输出位置, 目前日志是加密存储，格式为 *.xlog
+# 如果在程序使用过程中出现异常情况，请将日志提交给开发者进行排查
+# 请尽量使用绝对路径
+log_dir: "/tmp"
+
+# 详细日志采样级别，用于开发者排查问题使用, 日常使用建议设置为 0
+# 0: 不开启详细日志采样
+# 1: 记录 0.1% 日志采样
+# 2: 记录 1% 日志采样
+# 3: 全量日志记录，当机器数量超过 50 时候，当心磁盘存不下
+log_sampling_level: 0
+
+# DNS 服务器地址：避免 DNS 污染，请使用安全/可访问通的 DNS 地址
+# 默认：8.8.8.8, 8.8.4.4
+dns_server: "8.8.8.8, 8.8.4.4"
+
+# 临时 block 掉出问题的 IP
+# 在使用过程中，发现有些场景下会出现后端可达但是不可使用的场景：
+#  DNS 返回的地址，可以访问通，但是无法正常使用）
+# 当出现此类场景后，请添加对应 IP 至此
+block_ips: ""
+
+# DNS 解析重试次数
+# 当通过 dnsServer 解析到对应后端地址后，proxy 会尝试与其建立 TLS/TCP 连接
+# 如果 1s 内无法建立成功，则判断当前后端不可达
+# 随后将重新向 DNS 发起解析请求
+# 默认重试 10 次，超过重试次数后，服务会退出
+dns_retry_times: 10
+
+# IP可连接性校验时长（单位：秒）
+# 目前会校验矿池 IP 的可连接性，如规定时间内未能成功连接，则认为该 IP 不可用
+# 默认 1s，0 表示不校验
+dns_ip_verify_seconds: 1
+
+
+
+#######################
+#   新增功能配置区  #
+######################
+# 加密模式
+# 0: 不启用加密，2：服务端（接收加密数据），发送加密数据请使用本地解密端
+encrypt_mode: 0
+
+# 显卡机（RTX3080） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额会不平均，存在随机性
+# 会增加一定随机性，每次掉线 10% ～ 30% 左右的机器
+gpu_pool_mode: false
+
+# 专业机（蚂蚁，芯动，阿瓦隆） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额可能会不平均，存在随机性
+asic_pool_mode: false
+
+# 仅当 asic_pool_mode 为 true 时候生效
+# 抽水平滑级别，默认为 2
+# level 1： 每次抽 50% ~ 100% worker
+# level 2： 每次抽 25% ~ 50% worker
+# level 3: 每次抽 10% ~ 25% worker
+smooth_level: 2
+
+# 实验性功能：任务难度检查 v2，有效降低低难度提交造成的拒绝率
+#  开启后如发现算力波动明显，建议关闭此项后再进行观察
+enable_reject_checker_v2: true
+
+
+#######################
+#   Dashboard 配置区  #
+######################
+
+# 是否开启 Dashboard WEB UI，默认关闭
+enable_dashboard: false
+
+# 程序本地地址, 格式同 local_addr
+# 默认为空, 表示不开启管理后台
+# 当 enable_dashboard 为 true 且 dashboard_addr 不为空时候，才会开启 dashboard
+dashboard_addr: ""
+
+# 管理员 token
+dashboard_admin_token: "tax-yyds"
+
+# 观察者 token
+dashboard_observer_token: "tax-yyds"
+
+
+
+#######################
+#   自定义域名证书配置区 #
+######################
+# 当且仅当下面两项都不为空，自定义域名证书配置才会生效
+# 自行签发域名证书推荐使用： https://github:com/acmesh-official/acme.sh
+
+# 自定义域名证书路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/server.pem
+domain_cert: ""
+
+# 自定义域名证书私钥路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/private.key
+domain_private_key: ""
