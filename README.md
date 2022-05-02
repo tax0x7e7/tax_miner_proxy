@@ -49,9 +49,9 @@
 
 # 项目介绍
 
-## 支持币种:
+## 支持币种（2.0版本更新）:
 
-**专业机：BTC / ETH / LTC / ETC / ScPrime / BCH / dcr / zec**
+**专业机：BTC / ETH / LTC / ETC / ScPrime / BCH / DCR / ZEC**
 
 **显卡机：ETH / ETC / RVN / ERG / CFX / Ton**
 
