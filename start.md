@@ -1,6 +1,6 @@
 # 详细使用文档
 
-## 1. 预设快捷启动(仅windows)
+## 1. windows快捷启动
 
 我们为windows用户都提供了预设快捷启动，修改config文件后，双击bootstrap.bat 即可
 
