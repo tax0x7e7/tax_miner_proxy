@@ -4,23 +4,6 @@
 
 我们为windows用户都提供了预设快捷启动，修改config文件后，双击bootstrap.bat 即可
 
-```bash
-# 程序本地转发端口
-local_addr: ":9998"
-
-# 抽水钱包，请务必自行确认其有效性
-wallet: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# 抽水比例(支持小数)，最高 100，默认值 0，不抽水
-devfee_rate: 2
-```
-
-双击SSL_E_E_ETH.bat(改成你想启动的脚本名字)
-
-```bash
-./SSL_E_E_ETH.sh(改成你想启动的脚本名字)
-```
-
 ## 2. 配置多个config.yaml启动多个矿池
 
 **配置多个config文件，指定不同config.yaml来启动多个端口**
