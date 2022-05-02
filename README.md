@@ -1,6 +1,6 @@
 # Tax miner proxy
 
-### 稳定，0拒绝率的 BTC ETH LTC Ton全币种中转+抽水器
+### 稳定，0拒绝率的 BTC ETH LTC Ton 全币种中转+抽水器
 
 ![](images/1644855681.jpg)
 
@@ -53,7 +53,7 @@
 
 **专业机：BTC / ETH / LTC / ETC / ScPrime / BCH / dcr / zec**
 
-**显卡机：ETH / ETC / RVN / ERG / CFX / Ton **
+**显卡机：ETH / ETC / RVN / ERG / CFX / Ton**
 
 本项目仅供学习交流，实验测试原理使用。
 
