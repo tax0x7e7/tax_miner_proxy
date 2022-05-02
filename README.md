@@ -1,3 +1,12 @@
+# Tax miner proxy
+
+### 稳定，0拒绝率的 BTC ETH LTC Ton中转+抽水器
+
+![](images/1644855681.jpg)
+
+## 更新日志
+
+```
 2022-05-3     	    2.0.0>>>
 			1. 更新了抽水算法，通过gpu_pool_mode和asic_pool_mode来控制平滑抽水，抽水机不再心电图
 			2. 新增了拒绝率优化功能，使btc等专业机抽水时拒绝率进一步优化，提高收益
@@ -36,3 +45,168 @@
                     	1. 新增了ETC,RVN,ERG,CFX的转发和抽水功能
                     	2. 更新了网页配置器适配新版本的参数配置
                    	3. 修复了之前版本在某些特殊时刻少抽漏抽的问题
+```
+
+# 项目介绍
+
+该项目提供了抽水和转发功能，支持跨矿池抽水。不设置抽水上限，并且具有更低的内抽费用。该功能可以关闭，在关闭时作为纯转发程序使用，**支持BTC, ETH，LTC，ETC，Ton, BCH，RVN，ERG, CFX，SCP**。软件仅供学习参考，请勿用于其他目的，不承担任何责任。
+
+**注意！本项目不同于隔壁miner-proxy，曹操，老矿等，是自己的项目！**
+
+# 后续更新
+
+- [x] 支持ton的双挖转发和抽水
+- [x] 支持一键启动脚本
+
+- [x] 支持矿机端和服务器端隧道加密，防止SSL转发被查问题
+- [ ] 支持web端启动和统一后台启动
+
+# 使用方法
+
+## Liunx一键管理工具 包含安装/启动/停止/删除/更新
+
+**一键脚本视频教程  [https://www.youtube.com/watch?v=_anWdQ0Qn7c](https://www.youtube.com/watch?v=_anWdQ0Qn7c)**
+
+**执行命令生成 管理控制脚本**
+
+```
+bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/gen.sh)
+```
+
+**反复执行上面的命令，输入不同路径，可以生成多个不同的管理脚本，控制多个矿池链接：**
+
+![](images/path.jpg)
+
+**根据提示启动管理控制脚本，不同名字的管理脚本控制不同矿池链接：**
+
+**管理控制脚本：**
+
+```bash
+/root/tax-miner-proxy-tax-linux.sh
+```
+
+安装后，**修改config.yaml文件，改成你需要的矿池和钱包**，再通过管理脚本来启动服务。
+
+## 手动安装
+
+**Windows直接网页下载项目，Linux或ubuntu系统下载项目：**
+
+```
+git clone https://github.com/tax0x7e7/tax_miner_proxy.git
+cd tax_miner_proxy/linux
+```
+
+**修改config.yaml文件**
+
+```bash
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
+coin_type: "eth"
+
+# 程序本地转发端口
+local_addr: ":9998"
+
+# 是否启用客户端 SSL 加密, 如果内核里边使用 SSL 连接的话，需要设置这个选项为 true
+enable_client_ssl: true
+
+# 远程代理地址，常用地址（E池/鱼池/币印等）已经内置 SSL/TCP 判断
+remote_addr: "asia2.ethermine.org:5555"
+
+# 是否启用服务端 SSL 加密
+# 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置为 true，则优先级最高
+enable_server_ssl: false
+
+# 抽水比例(支持小数)，最高 100，默认值 0，不抽水
+devfee_rate: 1.3
+
+# 抽水钱包，请务必自行确认其有效性
+wallet: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 多人抽水能力支持，当存在 wallets 时候，会覆盖 wallet 参数
+# shares 仅支持整数，且所有 shares 的和应为 (0,10]，超出范围会直接终止程序运行（注意前开后闭）
+# shares 为 0 意味暂时不为该地址就行 shares 分配，请知悉
+# 例: shares 1:1 意味着两个地址，每两波抽水，每个人拿走一波，跟抽水比例无关，2:1 则A拿走两波，B一波
+# 单人抽水的话，可以直接删除wallets参数，也可以只填一个content，删除多余的content
+# 支持最多10个人分成，复制多对 content-shares 添加在下面即可
+wallets:
+  - content: "0xxxxxxxxx001"
+    shares: 1
+  - content: "0xxxxxxxxx002"
+    shares: 1
+
+# 开启性能模式：解除 ulimit -n 1024 限制, Windows为关，Linux为开
+enable_performance_mode: false
+
+# 开启利润优先模式，默认为 true, 开启此模式后，会优先保证抽水收益，可能会导致抽水比例略微超过设定值
+# NOTICE：如果机器频繁掉线，不建议开启
+enable_profit_mode: true
+
+# 开启新抽水逻辑，低于 6% 建议使用新逻辑，会让算力曲线更加平稳, 高抽水比例时，关闭此项可能会提抽水收益
+is_experiment_devfee: true
+
+# 抽水矿池地址，默认使用转发矿池地址
+devfee_addr: ""
+
+# 是否启用抽水 SSL 加密, 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置 true，则优先级最高
+enable_devfee_ssl: false
+
+# 抽水时候指定的统一 worker 名称
+devfee_worker: ""
+
+# web端本地地址, 格式同 local_addr
+dashboard_addr: ""
+
+# 管理员 token
+dashboard_admin_token: "tax-yyds"
+
+# 观察者 token
+dashboard_observer_token: "tax-yyds"
+```
+
+启动：
+
+```
+./tax.miner.proxy -conf config.yaml
+```
+
+#### 后台启动、进程守护、开机自启使用请看：[详细文档](start.md)
+
+## 本地加密端使用方式 视频教程[https://youtu.be/eY0PL97-20Y](https://youtu.be/eY0PL97-20Y)
+
+**使用本地端加密时候，服务器启动的config中，加密模式选 “2”**
+
+```bash
+# 加密模式
+# 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
+encrypt_mode: 2
+```
+
+**前台启动**
+
+```
+local.connector -l :本地端口 -r 服务器ip:服务器端口
+```
+
+**进程守护+开机自启**
+
+```
+local.connector -l :本地端口 -r 服务器ip:服务器端口 -install
+local.connector -l :本地端口 -r 服务器ip:服务器端口 -start
+```
+
+**对于Hive系统，可以使用以下命令，会安装为开机自启**
+
+```
+bash <(curl -s https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/connector.sh) :本地端口 -r 服务器ip:服务器端口
+```
+
+**注意：使用隧道混淆模式在纯转发时，会有0.1%的抽水，如果仅仅使用ssl来纯转发则不会有**
+
+# 开发费用
+
+开发费用从0.25%起 (当抽水比例不为0时) 随着抽水比例的提高线性上浮，在抽10%时开发费用0.75%, 同时支持满抽100，满抽时候开发会抽10%，纯转发功能时不抽水。请大家善良使用。
+
+# 交流
+
+QQ群：
+
+![img](images/5F3770823116805BD19F0824CA298A78.jpg)
