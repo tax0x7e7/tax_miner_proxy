@@ -1,4 +1,4 @@
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/bch/ton
+# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/bch/ton/dcr/ckb/zec
 coin_type: "eth"
 
 # 程序本地转发地址
@@ -6,7 +6,7 @@ local_addr: ":9998"
 
 # 是否启用客户端 SSL 加密
 # 如果内核里边使用 SSL 连接的话，需要设置这个选项为 true
-enable_client_ssl: true
+enable_client_ssl: false
 
 # 远程代理地址，常用地址（E池/鱼池/币印等）已经内置 SSL/TCP 判断
 remote_addr: "asia2.ethermine.org:5555"
@@ -54,16 +54,6 @@ devfee_rate: 10.3
 # 抽水时候指定的 worker 名称
 devfee_worker: ""
 
-# 程序本地地址, 格式同 local_addr
-# 默认为空, 表示不开启管理后台
-dashboard_addr: ""
-
-# 管理员 token
-dashboard_admin_token: "tax-yyds"
-
-# 观察者 token
-dashboard_observer_token: "tax-yyds"
-
 # debug 模式，如遇到异常情况，请开启 debug 模式，并反馈日志给开发者
 # 正常情况不要开启，会导致日志量增加非常多，导致硬盘爆掉
 enable_debug: false
@@ -79,8 +69,6 @@ log_dir: "/tmp"
 # 2: 记录 1% 日志采样
 # 3: 全量日志记录，当机器数量超过 50 时候，当心磁盘存不下
 log_sampling_level: 0
-
-
 
 # DNS 服务器地址：避免 DNS 污染，请使用安全/可访问通的 DNS 地址
 # 默认：8.8.8.8, 8.8.4.4
@@ -104,6 +92,68 @@ dns_retry_times: 10
 # 默认 1s，0 表示不校验
 dns_ip_verify_seconds: 1
 
+
+
+#######################
+#   新增功能配置区  #
+######################
 # 加密模式
-# 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
+# 0: 不启用加密，2：服务端（接收加密数据），发送加密数据请使用本地解密端
 encrypt_mode: 0
+
+# 显卡机（RTX3080） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额会不平均，存在随机性
+# 会增加一定随机性，每次掉线 10% ～ 30% 左右的机器
+gpu_pool_mode: false
+
+# 专业机（蚂蚁，芯动，阿瓦隆） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额可能会不平均，存在随机性
+asic_pool_mode: false
+
+# 仅当 asic_pool_mode 为 true 时候生效
+# 抽水平滑级别，默认为 2
+# level 1： 每次抽 50% ~ 100% worker
+# level 2： 每次抽 25% ~ 50% worker
+# level 3: 每次抽 10% ~ 25% worker
+smooth_level: 2
+
+# 实验性功能：任务难度检查 v2，有效降低低难度提交造成的拒绝率
+#  开启后如发现算力波动明显，建议关闭此项后再进行观察
+enable_reject_checker_v2: true
+
+
+#######################
+#   Dashboard 配置区  #
+######################
+
+# 是否开启 Dashboard WEB UI，默认关闭
+enable_dashboard: false
+
+# 程序本地地址, 格式同 local_addr
+# 默认为空, 表示不开启管理后台
+# 当 enable_dashboard 为 true 且 dashboard_addr 不为空时候，才会开启 dashboard
+dashboard_addr: ""
+
+# 管理员 token
+dashboard_admin_token: "tax-yyds"
+
+# 观察者 token
+dashboard_observer_token: "tax-yyds"
+
+
+
+#######################
+#   自定义域名证书配置区 #
+######################
+# 当且仅当下面两项都不为空，自定义域名证书配置才会生效
+# 自行签发域名证书推荐使用： https://github:com/acmesh-official/acme.sh
+
+# 自定义域名证书路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/server.pem
+domain_cert: ""
+
+# 自定义域名证书私钥路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/private.key
+domain_private_key: ""
