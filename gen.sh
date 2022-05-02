@@ -26,7 +26,7 @@ fi
 install() {
     $cmd update -y
     $cmd install curl wget -y
-    mkdir -p $dirname/config
+    
     echo "tax.miner.proxy 启动脚本生成器"
     read -p "$(echo -e "请选择使用平台，linux服务器 请输入 1，币印盒子内置抽水 请输入 2：")" flag
     arch=""
