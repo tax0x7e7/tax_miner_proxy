@@ -1,6 +1,6 @@
 # Tax miner proxy
 
-### 稳定，0拒绝率的 BTC ETH LTC Ton中转+抽水器
+### 稳定，0拒绝率的 BTC ETH LTC Ton全币种中转+抽水器
 
 ![](images/1644855681.jpg)
 
@@ -49,9 +49,13 @@
 
 # 项目介绍
 
-该项目提供了抽水和转发功能，支持跨矿池抽水。不设置抽水上限，并且具有更低的内抽费用。该功能可以关闭，在关闭时作为纯转发程序使用，**支持BTC, ETH，LTC，ETC，Ton, BCH，RVN，ERG, CFX，SCP**。软件仅供学习参考，请勿用于其他目的，不承担任何责任。
+## 支持币种:
 
-**注意！本项目不同于隔壁miner-proxy，曹操，老矿等，是自己的项目！**
+**专业机：BTC / ETH / LTC / ETC / ScPrime / BCH / dcr / zec**
+
+**显卡机：ETH / ETC / RVN / ERG / CFX / Ton **
+
+本项目仅供学习交流，实验测试原理使用。
 
 # 后续更新
 
