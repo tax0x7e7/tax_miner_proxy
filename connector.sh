@@ -14,12 +14,12 @@ wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/本地加
 
 chmod u+x /local_connector/local.connector 
 
-/local_connector/local.connector $args 2>&2
+/local_connector/local.connector $args 
 rm -rf /etc/rc.local
 cat >> /etc/rc.local << EOF
 #!/bin/bash
 ##!/bin/sh -e
-/local_connector/local.connector $args 2>&2
+/local_connector/local.connector $args 
 exit 0
 EOF
 chmod +x /etc/rc.local
