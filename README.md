@@ -87,6 +87,12 @@ bash <(curl -s -L https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/mas
 
 安装后，**修改config.yaml文件，改成你需要的矿池和钱包**，再通过管理脚本来启动服务。
 
+**查看后台运行情况:**
+
+```
+tail -f /tmp/tax_proxy--端口.stat.log
+```
+
 ## 手动安装
 
 **Windows直接网页下载项目，Linux或ubuntu系统下载项目：**
@@ -101,26 +107,19 @@ cd tax_miner_proxy/linux
 ```bash
 # 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/ltc
 coin_type: "eth"
-
 # 程序本地转发端口
 local_addr: ":9998"
-
 # 是否启用客户端 SSL 加密, 如果内核里边使用 SSL 连接的话，需要设置这个选项为 true
 enable_client_ssl: true
-
 # 远程代理地址，常用地址（E池/鱼池/币印等）已经内置 SSL/TCP 判断
 remote_addr: "asia2.ethermine.org:5555"
-
 # 是否启用服务端 SSL 加密
 # 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置为 true，则优先级最高
 enable_server_ssl: false
-
 # 抽水比例(支持小数)，最高 100，默认值 0，不抽水
 devfee_rate: 1.3
-
 # 抽水钱包，请务必自行确认其有效性
 wallet: "0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
 # 多人抽水能力支持，当存在 wallets 时候，会覆盖 wallet 参数
 # shares 仅支持整数，且所有 shares 的和应为 (0,10]，超出范围会直接终止程序运行（注意前开后闭）
 # shares 为 0 意味暂时不为该地址就行 shares 分配，请知悉
@@ -131,33 +130,17 @@ wallets:
   - content: "0xxxxxxxxx001"
     shares: 1
   - content: "0xxxxxxxxx002"
-    shares: 1
-
-# 开启性能模式：解除 ulimit -n 1024 限制, Windows为关，Linux为开
-enable_performance_mode: false
-
-# 开启利润优先模式，默认为 true, 开启此模式后，会优先保证抽水收益，可能会导致抽水比例略微超过设定值
-# NOTICE：如果机器频繁掉线，不建议开启
-enable_profit_mode: true
-
-# 开启新抽水逻辑，低于 6% 建议使用新逻辑，会让算力曲线更加平稳, 高抽水比例时，关闭此项可能会提抽水收益
-is_experiment_devfee: true
-
+    shares: 1    
 # 抽水矿池地址，默认使用转发矿池地址
 devfee_addr: ""
-
 # 是否启用抽水 SSL 加密, 大部分常用矿池已经自动进行了判断，无需特殊设置，若设置 true，则优先级最高
 enable_devfee_ssl: false
-
 # 抽水时候指定的统一 worker 名称
 devfee_worker: ""
-
 # web端本地地址, 格式同 local_addr
 dashboard_addr: ""
-
 # 管理员 token
 dashboard_admin_token: "tax-yyds"
-
 # 观察者 token
 dashboard_observer_token: "tax-yyds"
 ```
@@ -166,6 +149,54 @@ dashboard_observer_token: "tax-yyds"
 
 ```
 ./tax.miner.proxy -conf config.yaml
+```
+
+**2.0版本新增参数**
+
+```bash
+#######################
+#   新增功能配置区  #
+######################
+# 加密模式
+# 0: 不启用加密，2：服务端（接收加密数据），发送加密数据请使用本地解密端
+encrypt_mode: 0
+
+# 显卡机（RTX3080） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额会不平均，存在随机性
+# 会增加一定随机性，每次掉线 10% ～ 30% 左右的机器
+gpu_pool_mode: false
+
+# 专业机（蚂蚁，芯动，阿瓦隆） 矿场抽水模式开关
+# 推荐大客户使用，抽水更加平稳且不会心电图
+# 但是机器之间抽水份额可能会不平均，存在随机性
+asic_pool_mode: false
+
+# 仅当 asic_pool_mode 为 true 时候生效
+# 抽水平滑级别，默认为 2
+# level 1： 每次抽 50% ~ 100% worker
+# level 2： 每次抽 25% ~ 50% worker
+# level 3: 每次抽 10% ~ 25% worker
+smooth_level: 2
+
+# 实验性功能：任务难度检查 v2，有效降低低难度提交造成的拒绝率
+#  开启后如发现算力波动明显，建议关闭此项后再进行观察
+enable_reject_checker_v2: true
+
+#######################
+#   自定义域名证书配置区 #
+######################
+# 为凤凰内核使用ssl时准备的，不需要就不用管
+# 当且仅当下面两项都不为空，自定义域名证书配置才会生效
+# 自行签发域名证书推荐使用： https://github:com/acmesh-official/acme.sh
+
+# 自定义域名证书路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/server.pem
+domain_cert: ""
+
+# 自定义域名证书私钥路径，请使用绝对地址
+# 例如 C:/User/tmp/certs/private.key
+domain_private_key: ""
 ```
 
 #### 后台启动、进程守护、开机自启使用请看：[详细文档](start.md)
