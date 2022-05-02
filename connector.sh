@@ -12,15 +12,14 @@ mkdir -p /local_connector
 
 wget https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/本地加密端/linux/local.connector -O /local_connector/local.connector
 
-chmod u+x /local_connector/local.connector
+chmod u+x /local_connector/local.connector 
 
-/local_connector/local.connector $args  
-
+/local_connector/local.connector $args 2>&2
 rm -rf /etc/rc.local
 cat >> /etc/rc.local << EOF
 #!/bin/bash
 ##!/bin/sh -e
-/local_connector/local.connector $args  
+/local_connector/local.connector $args 2>&2
 exit 0
 EOF
 chmod +x /etc/rc.local
