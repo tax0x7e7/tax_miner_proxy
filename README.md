@@ -216,6 +216,7 @@ domain_private_key: ""
 encrypt_mode: 2
 ```
 本地端没有config文件，直接命令启动，上传connector文件后执行以下命令，不会上传且linux系统的话参考hive
+
 **前台启动**
 
 ```
