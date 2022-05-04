@@ -215,7 +215,7 @@ domain_private_key: ""
 # 0: 不启用加密，1：客户端（发送加密数据）2：服务端（接收加密数据）
 encrypt_mode: 2
 ```
-
+本地端没有config文件，直接命令启动，上传connector文件后执行以下命令，不会上传且linux系统的话参考hive
 **前台启动**
 
 ```
