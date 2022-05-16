@@ -232,7 +232,7 @@ local.connector -l :本地端口 -r 服务器ip:服务器端口 -start
 **对于Hive系统，可以使用以下命令，会安装为开机自启**
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/connector.sh) :本地端口 -r 服务器ip:服务器端口
+bash <(curl -s https://raw.githubusercontent.com/tax0x7e7/tax_miner_proxy/master/connector.sh) -l :本地端口 -r 服务器ip:服务器端口
 ```
 
 # 开发费用
