@@ -1,4 +1,4 @@
-# 代币类型，目前支持：eth/etc/rvn/erg/cfx/btc/ltc/scp/bch/ton/dcr/ckb/zec
+# 代币类型，目前支持：eth/etc/ethw/etf/rvn/erg/cfx/btc/ltc/scp/bch/ton/dcr/ckb/zec
 coin_type: "eth"
 
 # 程序本地转发地址
